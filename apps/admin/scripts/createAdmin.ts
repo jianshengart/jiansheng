@@ -22,7 +22,6 @@ const user = await internalAdapter.createUser(
 await internalAdapter.linkAccount({
   accountId: user.id,
   providerId: 'credential',
-  issuer: 'local:credential',
   userId: user.id,
   password: await password.hash(initialPassword),
 });
