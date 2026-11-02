@@ -7,12 +7,12 @@ import { and, desc, eq } from 'drizzle-orm';
 import Stripe from 'stripe';
 import z from 'zod';
 
-import { publicProcedure } from '../orpc';
+import { publicProcedure, publicQueryProcedure } from '../orpc';
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY);
 
 export const productRouter = {
-  get: publicProcedure
+  get: publicQueryProcedure
     .input(
       z.object({
         id: z.number().int().positive(),
@@ -49,7 +49,7 @@ export const productRouter = {
       };
     }),
 
-  list: publicProcedure.handler(async () => {
+  list: publicQueryProcedure.handler(async () => {
     const productsRes = await db.query.products.findMany({
       where: eq(products.active, true),
       orderBy: [desc(products.id)],
@@ -77,7 +77,7 @@ export const productRouter = {
     }));
   }),
 
-  getRelated: publicProcedure
+  getRelated: publicQueryProcedure
     .input(
       z.object({
         workId: z.number().int().positive(),
