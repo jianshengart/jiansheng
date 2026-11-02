@@ -8,7 +8,11 @@ function createQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 60 * 1000,
+        // Pages are served from ISR/prerender, so hydrated data can be up to an hour
+        // old. Treat it as fresh instead of refetching every query right after
+        // hydration (and on every tab focus); the data only changes via the admin app.
+        staleTime: Infinity,
+        refetchOnWindowFocus: false,
         queryKeyHashFn: (queryKey) => {
           const { json, meta } = serializer.serializeJson(queryKey);
           return hashKey([json, meta?.map((entry) => JSON.stringify(entry)).sort()]);

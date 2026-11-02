@@ -4,10 +4,10 @@ import { works, workSeries } from '@jiansheng/shared/schema';
 import { desc, eq } from 'drizzle-orm';
 import z from 'zod';
 
-import { publicProcedure } from '../orpc';
+import { publicQueryProcedure } from '../orpc';
 
 export const workRouter = {
-  listSeries: publicProcedure.handler(async () => {
+  listSeries: publicQueryProcedure.handler(async () => {
     const res = await db.query.workSeries.findMany({
       orderBy: [desc(workSeries.id)],
       with: {
@@ -40,7 +40,7 @@ export const workRouter = {
     }));
   }),
 
-  getSeries: publicProcedure
+  getSeries: publicQueryProcedure
     .input(
       z.object({
         id: z.number().int().positive(),
@@ -82,7 +82,7 @@ export const workRouter = {
       };
     }),
 
-  get: publicProcedure
+  get: publicQueryProcedure
     .input(
       z.object({
         id: z.number().int().positive(),
@@ -109,7 +109,7 @@ export const workRouter = {
       };
     }),
 
-  list: publicProcedure.handler(async () => {
+  list: publicQueryProcedure.handler(async () => {
     const workRes = await db.query.works.findMany({
       orderBy: [desc(works.id)],
       with: {

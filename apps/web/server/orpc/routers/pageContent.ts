@@ -3,7 +3,7 @@ import { pageContents } from '@jiansheng/shared/schema';
 import { eq, inArray } from 'drizzle-orm';
 import z from 'zod';
 
-import { publicProcedure } from '../orpc';
+import { publicQueryProcedure } from '../orpc';
 
 const PAGE_SLUGS = ['about', 'contact'] as const;
 const pageSlugSchema = z.enum(PAGE_SLUGS);
@@ -51,7 +51,7 @@ async function ensureDefaultPages() {
 }
 
 export const pageContentRouter = {
-  getBySlug: publicProcedure
+  getBySlug: publicQueryProcedure
     .input(
       z.object({
         slug: pageSlugSchema,
