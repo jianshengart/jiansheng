@@ -10,19 +10,19 @@ function createQueryClient() {
       queries: {
         staleTime: 60 * 1000,
         queryKeyHashFn: (queryKey) => {
-          const { json, meta } = serializer.serialize(queryKey);
+          const { json, meta } = serializer.serializeJson(queryKey);
           return hashKey([json, meta?.map((entry) => JSON.stringify(entry)).sort()]);
         },
       },
       dehydrate: {
         serializeData: (data) => {
-          const { json, meta } = serializer.serialize(data);
+          const { json, meta } = serializer.serializeJson(data);
           return { json, meta };
         },
       },
       hydrate: {
         deserializeData(data) {
-          return serializer.deserialize(data);
+          return serializer.deserializeJson(data);
         },
       },
     },

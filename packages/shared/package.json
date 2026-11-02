@@ -13,17 +13,17 @@
     "lint:fix": "vp check --fix"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.1119.0",
-    "@aws-sdk/s3-request-presigner": "^3.1119.0",
-    "@neondatabase/serverless": "^1.1.0",
+    "@aws-sdk/client-s3": "^3.1161.0",
+    "@aws-sdk/s3-request-presigner": "^3.1161.0",
+    "@neondatabase/serverless": "^1.2.0",
     "bufferutil": "^4.1.0",
-    "dotenv": "^17.4.2",
-    "drizzle-orm": "^0.45.2",
-    "ws": "^8.21.3",
-    "zod": "^4.4.3"
+    "dotenv": "^18.0.9",
+    "drizzle-orm": "^0.45.4",
+    "ws": "^8.22.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@types/ws": "^8.18.1",
+    "@types/ws": "^8.18.2",
     "vite-plus": "catalog:"
   }
 }
