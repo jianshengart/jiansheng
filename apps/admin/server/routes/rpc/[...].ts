@@ -1,5 +1,6 @@
 import { onError } from '@orpc/server';
 import { RPCHandler } from '@orpc/server/fetch';
+import { BatchHandlerPlugin } from '@orpc/server/plugins';
 import { toWebRequest } from 'h3';
 
 import { createContext } from '../../orpc/context';
@@ -11,6 +12,7 @@ const handler = new RPCHandler(router, {
       console.error(error);
     }),
   ],
+  plugins: [new BatchHandlerPlugin()],
 });
 
 export default defineEventHandler(async (event) => {
